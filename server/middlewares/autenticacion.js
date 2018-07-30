@@ -45,3 +45,5 @@ module.exports = {
     verificaToken,
     verificaAdmin_Role
 }
+
+// correo: adriana.soto@progressus.com.co
