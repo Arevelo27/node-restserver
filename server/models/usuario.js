@@ -48,5 +48,6 @@ usuarioSchema.methods.toJSON = function() {
     return userObject;
 }
 
+// Se usua para validar que no se puedea duplicar un registro, con el campo email
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser unicó' });
 module.exports = mongoose.model('Usuario', usuarioSchema);
