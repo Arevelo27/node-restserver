@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 // ==========================
 // Vericar Token
 // ==========================
-
 let verificaToken = (req, res, next) => {
     let token = req.get('token');
 
@@ -41,9 +40,33 @@ let verificaAdmin_Role = (req, res, next) => {
     }
 };
 
+
+// ==========================
+// Verifica token para imagen
+// ==========================
+let verificaTokenImg = (req, res, next) => {
+
+    let token = req.query.token;
+
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+        if (err) {
+            return res.json({
+                ok: false,
+                err: {
+                    message: 'Token no válido'
+                }
+            });
+        }
+
+        req.usuario = decoded.usuario;
+        next();
+    });
+}
+
 module.exports = {
     verificaToken,
-    verificaAdmin_Role
+    verificaAdmin_Role,
+    verificaTokenImg
 }
 
 // correo: adriana.soto@progressus.com.co
